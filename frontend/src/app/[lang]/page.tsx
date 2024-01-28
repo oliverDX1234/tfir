@@ -6,11 +6,41 @@ import heroImage from "@public/images/home/hero-image.png";
 import BgIcon1 from "@public/images/home/bg-icon-1.png";
 import BgIcon2 from "@public/images/home/bg-icon-2.png";
 
-export default function Home() {
+import {
+  getLatestEntry,
+  getCarouselImagesBySection,
+} from "@/app/[lang]/utils/get-strapi-entry";
+ 
+import { getStrapiMedia } from "@/app/[lang]/utils/api-helpers";
+import {
+  Event,
+  CarouselSection,
+  CarouselImage,
+} from "@/app/[lang]/utils/shared-types";
+
+type Props = {
+  params: {
+    lang: string;
+    slug: string;
+  };
+};
+
+export default async function Home({ params }: Props) {
+  const latestEvent: Event = await getLatestEntry("/events", params.lang);
+
+  const carouselSection: CarouselSection = await getCarouselImagesBySection(
+    "how-we-did-it",
+    params.lang
+  );
+
+  const latestEventImageUrl = getStrapiMedia(
+    latestEvent?.image.data?.attributes.url
+  );
+
   return (
     <>
       {/* HERO SECTION */}
-      <section className="relative bg-gradient-to-t from-midnight-blue from-50% via-purple to-midnight-blue dark:text-gray-100">
+      <section className="relative bg-gradient-to-tr from-midnight-blue from-60% to-purple dark:text-gray-100">
         <div className="pt-10 pb-16 px-5 md:px-5 md:py-[100px] lg:py-[120px] lg:px-[120px] grid xl:grid-cols-2 gap-20 lg:gap-10 xl:gap-0 max-w-[1440px] mx-auto">
           <div className="flex flex-col justify-start rounded-lg xl:text-left">
             <h5 className="font-arupala text-base mb-4">
@@ -70,25 +100,20 @@ export default function Home() {
 
             <div className="flex flex-col xl:flex-row gap-8">
               <Image
-                src="https://placehold.co/420x260"
-                alt=""
+                src={latestEventImageUrl || ""}
+                alt="Latest Event Image"
                 className="m-auto rounded-[26px] border border-purple w-full xl:w-[420px] h-auto"
-                unoptimized
                 width={420}
                 height={260}
               />
 
               <div className="flex flex-col">
                 <h1 className="font-arupala text-3xl font-semibold leading-none mb-3">
-                  Online Webinar
+                  {latestEvent?.title}
                 </h1>
 
                 <p className="tmt-6 pb-8 text-base md:text-lg font-light">
-                  Get guided through the challenges of the modern world of
-                  remote work. Explore the revolutionary impact of remote work
-                  on education and growth, and get the latest insights to help
-                  you master remote work finances and strategies on The Future
-                  is Remote online webinar.
+                  {latestEvent?.description}
                 </p>
 
                 <div className="mt-auto h-[1px] w-full bg-gradient-to-r from-purple from-30% to-transparent"></div>
@@ -100,6 +125,29 @@ export default function Home() {
                 Discover more
               </BaseButton>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* HOW WE DID IT SECTION */}
+      <section className="bg-midnight-blue">
+        <div className="px-5 pt-0 pb-16 md:pb-[100px] lg:pb-[120px] md:px-5 lg:px-[120px]  max-w-[1440px] mx-auto">
+          <h1 className="font-arupala text-2xl md:text-3xl font-semibold leading-none mb-12">
+            How we did it
+          </h1>
+
+          <div className="grid grid-cols-4">
+            {carouselSection?.images.map((image: CarouselImage) => (
+              <div className="relative" key={image.id}>
+                <Image
+                  src={getStrapiMedia(image.image.data?.attributes.url) || ""}
+                  alt={image.alt}
+                  className="rounded-[20px]"
+                  width={420}
+                  height={260}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
