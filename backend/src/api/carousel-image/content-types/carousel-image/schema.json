@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "carousel_images",
+  "info": {
+    "singularName": "carousel-image",
+    "pluralName": "carousel-images",
+    "displayName": "Carousel Image",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "images": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.carousel-image"
+    },
+    "section": {
+      "type": "uid"
+    }
+  }
+}

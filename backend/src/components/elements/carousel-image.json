@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_elements_carousel_images",
+  "info": {
+    "displayName": "Carousel Image"
+  },
+  "options": {},
+  "attributes": {
+    "alt": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
