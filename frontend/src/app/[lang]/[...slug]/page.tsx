@@ -19,8 +19,8 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     const metadata = page.data[0].attributes.seo
 
     return {
-        title: metadata.metaTitle,
-        description: metadata.metaDescription
+        title: metadata?.metaTitle,
+        description: metadata?.metaDescription
     }
 }
 

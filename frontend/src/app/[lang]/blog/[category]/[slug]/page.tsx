@@ -46,8 +46,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     const metadata = meta[0].attributes.seo;
 
     return {
-        title: metadata.metaTitle,
-        description: metadata.metaDescription,
+        title: metadata?.metaTitle,
+        description: metadata?.metaDescription,
     };
 }
 
