@@ -7,19 +7,18 @@ body {
   @apply dark:bg-black;
 }
 
-h2{
+h2 {
   @apply font-arupala;
 }
 
-p{
+p {
   @apply font-inter;
-  @apply text-p-color
+  @apply text-p-color;
 }
-
 
 /******************************************* 
   Rich Text Styles
-*******************************************/ 
+*******************************************/
 
 /* Headers */
 .rich-text h1 {
@@ -131,10 +130,9 @@ p{
   @apply bg-yellow-100 border-yellow-500 text-yellow-700 px-4 py-2 rounded-lg mb-4;
 }
 
-
 /******************************************* 
   React Slideshow Styles
-*******************************************/   
+*******************************************/
 
 .react-slideshow-container [aria-label="Previous Slide"] {
   margin-left: 1rem;
@@ -142,4 +140,79 @@ p{
 
 .react-slideshow-container [aria-label="Next Slide"] {
   margin-right: 1rem;
+}
+
+.custom-dot-list-style {
+  bottom: -50px !important;
+  position: unset !important;
+  margin-top: 40px !important;
+}
+
+.custom-dot-list-style button {
+  border: none !important;
+  background: #ebf3ff;
+}
+.react-multi-carousel-dot.react-multi-carousel-dot--active button {
+  background: #ebf3ff !important;
+  border: none !important;
+}
+
+@keyframes slide {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes slide-left-to-right {
+  0% {
+      background-position: 0 0;
+  }
+
+  100% {
+      background-position: 100% 0;
+  }
+}
+
+.explore-carousel .carosel-items {
+  width: 200%;
+  height: 100%;
+  background-image: url(../../../public/images/home/explore-learn-grow.svg);
+  animation: slide 30s linear infinite;
+  background-size: auto;
+}
+
+.explore-carousel .carosel-items .carosel-img {
+  max-width: 100%;
+  height: auto;
+  visibility: hidden;
+}
+
+.future-is-remote-carousel .carosel-items{
+  animation: slide-left-to-right 100s linear infinite;
+  width: 200%;
+  height: 100%;
+  background-image: url(../../../public/images/home/future-is-remote.svg);
+  background-size: auto;
+}
+
+.future-is-remote-carousel .carosel-items .carosel-img {
+  max-width: 100%;
+  height: auto;
+  visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  .explore-carousel .carosel-items {
+    width: 10000px;
+    animation: slide 300s linear infinite;
+  }
+
+  .future-is-remote-carousel .carosel-items {
+    width: 10000px;
+    animation: slide-left-to-right 300s linear infinite;
+}
 }

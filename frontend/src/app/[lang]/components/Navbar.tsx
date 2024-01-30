@@ -68,7 +68,7 @@ export default function Navbar({
     setMobileMenuOpen(false);
   };
   return (
-    <div className="dark:bg-midnight-blue dark:text-gray-100 border-b border-purple">
+    <div className="dark:bg-midnight-blue-light dark:text-gray-100 border-b border-purple">
       <div className="px-4 py-2 md:px-[20px] lg:px-[120px]  max-w-[1440px] mx-auto">
         <div className="flex justify-between h-16 mx-auto px-0">
           <Logo src={logoUrl}>

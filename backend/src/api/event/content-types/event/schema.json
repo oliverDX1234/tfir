@@ -78,6 +78,11 @@
       },
       "type": "datetime",
       "required": true
+    },
+    "country": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::country.country"
     }
   }
 }

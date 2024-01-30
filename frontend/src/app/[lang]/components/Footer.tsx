@@ -46,7 +46,6 @@ function RenderSocialIcon({ social }: { social: string | undefined }) {
 }
 
 export default function Footer({
-  logoUrl,
   logoText,
   menuLinks,
 }: {
@@ -71,11 +70,11 @@ export default function Footer({
   };
 
   return (
-    <footer className="dark:bg-midnight-blue dark:text-gray-50">
-      <div className="py-16 px-7 md:px-[20px] lg:px-[120px] space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50 max-w-[1440px] mx-auto">
-        <div className="flex justify-between pb-20">
+    <footer className="relative dark:bg-midnight-blue-dark dark:text-gray-50">
+      <div className="pt-16 pb-4 px-5 md:px-[20px] lg:px-[120px] divide-y divide-purple md:space-y-12 divide-opacity-50 max-w-[1440px] mx-auto">
+        <div className="flex flex-col items-start md:items-center md:flex-row md:justify-between pb-8 md:pb-20">
           <div className="pb-6 col-span-full md:pb-0 md:col-span-2">
-            <LogoFooter src={logoUrl}>
+            <LogoFooter>
               {logoText && (
                 <h2 className="text-sm lg:text-xl font-bold">
                   <BrokenLogoText text={logoText} />
@@ -84,8 +83,8 @@ export default function Footer({
             </LogoFooter>
           </div>
 
-          <div className="col-span-10 text-center md:text-left md:col-span-10 items-center justify-end flex-shrink-0 hidden xl:flex">
-            <ul className="items-stretch hidden space-x-3 xl:flex">
+          <div className="flex col-span-10 text-center md:text-left md:col-span-10 items-center justify-end flex-shrink-0">
+            <ul className="flex flex-col md:flex-row items-stretch space-y-4 md:space-y-0 md:space-x-3">
               {menuLinks.map((link: FooterLink) => (
                 <FooterLink key={link.id} {...link} />
               ))}
@@ -94,7 +93,7 @@ export default function Footer({
         </div>
         <div className="grid justify-center pt-6">
           <div className="flex">
-            <span className="font-arupala text-sm mr-2 pb-20">
+            <span className="font-arupala text-sm pb-8 md:pb-20">
               {new Date().getFullYear()} All rights reserved
             </span>
           </div>

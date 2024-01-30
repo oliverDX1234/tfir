@@ -32,6 +32,70 @@ export async function getBlogBySlug(slug: string) {
   return response;
 }
 
+export async function getLastNBlogs(numberOfBlogs: number, lang: string) {
+  const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+
+  const urlParamsObject = {
+    filters: {},
+    sort: ["createdAt:desc"],
+    pagination: { start: 0, limit: numberOfBlogs },
+    locale: lang,
+    populate: {
+      image: {
+        fields: ["url", "alternativeText", "caption", "width", "height"],
+      },
+    },
+  };
+  const options = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const res = await fetchAPI("/blogs", urlParamsObject, options);
+
+    return res.data;
+  } catch {
+    console.log("Error fetching latest entry");
+  }
+}
+
+export async function getFutureNEvents(
+  start: number = 0,
+  numberOfEvents: number,
+  lang: string
+) {
+  const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const urlParamsObject = {
+    filters: {
+      date: {
+        $gte: today,
+      },
+    },
+    sort: ["date:asc"],
+    pagination: { start: start, limit: numberOfEvents },
+    locale: lang,
+    populate: {
+      image: {
+        fields: ["url", "alternativeText", "caption", "width", "height"],
+      },
+      country: {
+        fields: ["name", "code"],
+      },
+    },
+  };
+
+  const options = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const res = await fetchAPI("/events", urlParamsObject, options);
+
+    return res.data;
+  } catch {
+    console.log("Error fetching latest entry");
+  }
+}
+
 export async function getLatestEntry(path: string, lang: string) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
@@ -50,13 +114,16 @@ export async function getLatestEntry(path: string, lang: string) {
 
   try {
     const res = await fetchAPI(path, urlParamsObject, options);
-    return res.data[0].attributes;
+    return res.data[0];
   } catch {
     console.log("Error fetching latest entry");
   }
 }
 
-export async function getCarouselImagesBySection(section: string, lang: string | null) {
+export async function getCarouselImagesBySection(
+  section: string,
+  lang: string | null
+) {
   const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 
   const urlParamsObject = {
@@ -66,11 +133,11 @@ export async function getCarouselImagesBySection(section: string, lang: string |
     populate: {
       images: {
         populate: {
-          image:{
-            populate:{
+          image: {
+            populate: {
               fields: ["url", "alternativeText", "caption", "width", "height"],
-            }
-          }
+            },
+          },
         },
       },
     },
@@ -80,7 +147,7 @@ export async function getCarouselImagesBySection(section: string, lang: string |
 
   try {
     const res = await fetchAPI("/carousel-images", urlParamsObject, options);
-    return res.data[0].attributes;
+    return res.data[0];
   } catch {
     console.log("Error fetching carousel images");
   }

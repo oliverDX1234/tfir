@@ -7,27 +7,57 @@ interface Image {
   };
 }
 
+interface Country {
+  data: {
+    id: number;
+    attributes: {
+      name: string;
+      code: string;
+    };
+  };
+}
+
 export interface Event {
-  title: string;
-  description: string;
-  slug: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  locale: string;
-  date: string;
-  image: Image;
+  id: number;
+  attributes: {
+    title: string;
+    description: string;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    locale: string;
+    date: string;
+    image: Image;
+    country: Country;
+  };
+}
+
+export interface Blog {
+  id: number;
+  attributes: {
+    title: string;
+    description: string;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    locale: string;
+    image: Image;
+  };
 }
 
 export interface CarouselImage {
-    id: number;
-    alt: string;
-    country?: string;
-    image: Image;
-  }
+  id: number;
+  alt: string;
+  country?: string;
+  image: Image;
+}
 
 export interface CarouselSection {
   id: number;
-  section: string;
-  images: CarouselImage[];
+  attributes: {
+    section: string;
+    images: CarouselImage[];
+  };
 }

@@ -16,9 +16,14 @@ module.exports = {
         inter: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        "midnight-blue": "#0A0A2B",
+        "midnight-blue": {
+          light: "#0A0A2B",
+          dark: "#060625",
+        },
         purple: "#5152FB",
         "p-color": "#CACAFF",
+        "brand-yellow": "#FDBC42",
+        "brand-pink": "#F05371",
       },
       fontSize: {
         xs: "0.75rem",
